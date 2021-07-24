@@ -9,7 +9,6 @@ const PostInput = document.querySelectorAll('.add-elemnt input')[0]
 let PostsArr =[]
 let post = ''
 
-
 // CLASSES
 class Posts{
     static id =1
@@ -69,22 +68,21 @@ const showPosts = () =>{
         </div>
         
         <div class="flex side">
-            <img src="./images/g1.png" id="delete" alt="">
-            <img src="./images/n1.png" id="edit" alt="">
+            <img src="./images/g1.png" onclick="Delete(${post.id})" alt="">
+            <img src="./images/n1.png" alt="">
         </div>
         </div>`
 
     }
-   
 }  
 showPosts()
 
 
 // Update('EYal',1)
 
-Create('eyal')
-Create('eyal2')
-Create('eyal3')
+// Create('eyal')
+// Create('eyal2')
+// Create('eyal3')
 
 // Read()
 
