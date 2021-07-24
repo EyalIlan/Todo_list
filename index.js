@@ -57,9 +57,13 @@ const UpdateMode = (id) =>{
 }
 
 
-const Update = () =>{
-  
-
+const Update = (id) =>{
+    console.log('hello');
+    let post = PostsArr.find(p => p.id === id)
+    console.log(post);
+    post.post = post.edit
+    post.editMode = false
+    showPosts()
 }
 const Delete = (id) =>{
     let index = PostsArr.map(p => p.id).indexOf(id)
@@ -96,8 +100,8 @@ const showPosts = () =>{
             </div>
             
             <div class="flex side">
-                <img src="./images/cancel.png" onclick= "Update(${post.id})" alt="">
-                <img src="./images/check.png" onclick=  "Update()" alt="">
+                <img src="./images/cancel.png" onclick= "Update(${post.id},true)" alt="">
+                <img src="./images/check.png" onclick=  "Update(${post.id},false)" alt="">
             </div>
             </div>`
         }
