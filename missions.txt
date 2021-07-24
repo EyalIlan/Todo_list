@@ -1,0 +1,2 @@
+//edit function
+// cross task -> cross the task when the finish button is pressed

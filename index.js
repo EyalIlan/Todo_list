@@ -15,7 +15,8 @@ class Posts{
     constructor(post){
         this.post = post
         this.id = Posts.id++
-        this.isCheck = false
+        this.isCheck = false,
+        this.editMode = false
     }
 
 }
@@ -42,9 +43,10 @@ const Read = () =>{
     }
 }
 
-const Update = (UpdatePost,id) =>{
+const Update = (id) =>{
     let post = PostsArr.find(p => p.id === id)
-    post.post = UpdatePost
+    post.editMode = true
+    showPosts()
 }
 
 const Delete = (id) =>{
@@ -59,19 +61,36 @@ const showPosts = () =>{
     
     for(let post of PostsArr){
        
-        POSTS.innerHTML += `<div class="post">
-        <div class="flex side">
-            <input type="checkbox">
-        </div>
-        <div class="flex">
-            <p>${post.post}</p>
-        </div>
-        
-        <div class="flex side">
-            <img src="./images/g1.png" onclick="Delete(${post.id})" alt="">
-            <img src="./images/n1.png" alt="">
-        </div>
-        </div>`
+        if(!post.editMode){
+            POSTS.innerHTML += `<div class="post">
+            <div class="flex side">
+                <input type="checkbox">
+            </div>
+            <div class="flex">
+                <p>${post.post}</p>
+            </div>
+            
+            <div class="flex side">
+                <img src="./images/g1.png" onclick= "Delete(${post.id})" alt="">
+                <img src="./images/n1.png" onclick= "Update(${post.id})" alt="">
+            </div>
+            </div>`
+        }
+        else{
+            POSTS.innerHTML += `<div class="post">
+            <div class="flex side">
+                <input type="checkbox">
+            </div>
+            <div class="flex">
+                <input type="text" placeHolder/>
+            </div>
+            
+            <div class="flex side">
+                <img src="./images/cancel.png" onclick= "Delete(${post.id})" alt="">
+                <img src="./images/check.png" onclick= "Update()" alt="">
+            </div>
+            </div>`
+        }
 
     }
 }  
