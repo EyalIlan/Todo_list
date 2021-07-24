@@ -6,6 +6,9 @@ const AddPost = document.querySelectorAll('.add-elemnt button')[0]
 const PostInput = document.querySelectorAll('.add-elemnt input')[0]
 
 
+
+
+
 let PostsArr =[]
 let post = ''
 
@@ -16,7 +19,8 @@ class Posts{
         this.post = post
         this.id = Posts.id++
         this.isCheck = false,
-        this.editMode = false
+        this.editMode = false,
+        this.edit = ''
     }
 
 }
@@ -31,6 +35,7 @@ PostInput.addEventListener('input',p =>{
 })
 
 
+
 // FUNCTIONS
 const Create = (post) =>{
     PostsArr.push(new Posts(post))
@@ -43,14 +48,20 @@ const Read = () =>{
     }
 }
 
-const Update = (id) =>{
+const UpdateMode = (id) =>{
     let post = PostsArr.find(p => p.id === id)
     post.editMode = true
     showPosts()
+    
+    
 }
 
+
+const Update = () =>{
+  
+
+}
 const Delete = (id) =>{
-    console.log(id);
     let index = PostsArr.map(p => p.id).indexOf(id)
     PostsArr.splice(index,1)
     showPosts()
@@ -59,8 +70,7 @@ const Delete = (id) =>{
 const showPosts = () =>{
     POSTS.innerHTML = ''
     
-    for(let post of PostsArr){
-       
+    for(let post of PostsArr){   
         if(!post.editMode){
             POSTS.innerHTML += `<div class="post">
             <div class="flex side">
@@ -72,7 +82,7 @@ const showPosts = () =>{
             
             <div class="flex side">
                 <img src="./images/g1.png" onclick= "Delete(${post.id})" alt="">
-                <img src="./images/n1.png" onclick= "Update(${post.id})" alt="">
+                <img src="./images/n1.png" onclick= "UpdateMode(${post.id})" alt="">
             </div>
             </div>`
         }
@@ -82,20 +92,24 @@ const showPosts = () =>{
                 <input type="checkbox">
             </div>
             <div class="flex">
-                <input type="text" placeHolder/>
+                <input type="text" placeHolder class="editValue" postID="${post.id}"/>
             </div>
             
             <div class="flex side">
-                <img src="./images/cancel.png" onclick= "Delete(${post.id})" alt="">
-                <img src="./images/check.png" onclick= "Update()" alt="">
+                <img src="./images/cancel.png" onclick= "Update(${post.id})" alt="">
+                <img src="./images/check.png" onclick=  "Update()" alt="">
             </div>
             </div>`
         }
-
+    }
+    const EditValues = document.querySelectorAll('.editValue')
+    for(let post of EditValues){
+        post.addEventListener('input', p =>{
+            console.log(p.target.getAttribute('postID'));
+        })
     }
 }  
 showPosts()
-
 
 // Update('EYal',1)
 
