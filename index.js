@@ -105,16 +105,18 @@ const showPosts = () =>{
     const EditValues = document.querySelectorAll('.editValue')
     for(let post of EditValues){
         post.addEventListener('input', p =>{
-            console.log(p.target.getAttribute('postID'));
-        })
+          let ID = parseInt(p.target.getAttribute('postID'))
+          let POST = PostsArr.find(p => p.id === ID)
+          POST.edit = p.target.value
+        })  
     }
 }  
 showPosts()
 
 // Update('EYal',1)
 
-// Create('eyal')
-// Create('eyal2')
+Create('eyal')
+Create('eyal2')
 // Create('eyal3')
 
 // Read()
