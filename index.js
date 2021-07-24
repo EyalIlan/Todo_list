@@ -57,12 +57,15 @@ const UpdateMode = (id) =>{
 }
 
 
-const Update = (id) =>{
-    console.log('hello');
+const Update = (id,check) =>{
     let post = PostsArr.find(p => p.id === id)
-    console.log(post);
-    post.post = post.edit
-    post.editMode = false
+    if(check){
+        post.post = post.edit
+        post.editMode = false
+    }else{
+        post.edt =''
+        post.editMode = false
+    }
     showPosts()
 }
 const Delete = (id) =>{
@@ -71,24 +74,50 @@ const Delete = (id) =>{
     showPosts()
 }
 
+
+const finishTask = (id) =>{
+    // console.log(id);
+    let post = PostsArr.find(p => p.id === id)
+    console.log(post);
+     
+     post.isCheck = !post.isCheck
+     showPosts()
+}
+
 const showPosts = () =>{
     POSTS.innerHTML = ''
-    
+
+
+
     for(let post of PostsArr){   
+        
+        let check
+
+        if(!post.isCheck){
+            check =  `<del><p>${post.post}</p></del>`
+        }
+        else{
+            check =  `<p>${post.post}</p>`
+        }
+
         if(!post.editMode){
             POSTS.innerHTML += `<div class="post">
             <div class="flex side">
-                <input type="checkbox">
+                <input type="checkbox" onclick = "finishTask(${post.id})" checked= "${post.isCheck}">
             </div>
             <div class="flex">
-                <p>${post.post}</p>
+            `
+            + 
+            check
+            +
+            `
             </div>
-            
             <div class="flex side">
                 <img src="./images/g1.png" onclick= "Delete(${post.id})" alt="">
                 <img src="./images/n1.png" onclick= "UpdateMode(${post.id})" alt="">
             </div>
-            </div>`
+            </div>
+            `
         }
         else{
             POSTS.innerHTML += `<div class="post">
@@ -96,12 +125,12 @@ const showPosts = () =>{
                 <input type="checkbox">
             </div>
             <div class="flex">
-                <input type="text" placeHolder class="editValue" postID="${post.id}"/>
+                <input type="text" placeHolder class="editValue" postID="${post.id}" value = "${post.edit}"/>
             </div>
             
             <div class="flex side">
-                <img src="./images/cancel.png" onclick= "Update(${post.id},true)" alt="">
-                <img src="./images/check.png" onclick=  "Update(${post.id},false)" alt="">
+                <img src="./images/cancel.png" onclick= "Update(${post.id},false)" alt="">
+                <img src="./images/check.png" onclick=  "Update(${post.id},true)" alt="">
             </div>
             </div>`
         }
@@ -118,7 +147,6 @@ const showPosts = () =>{
 showPosts()
 
 // Update('EYal',1)
-
 Create('eyal')
 Create('eyal2')
 // Create('eyal3')
