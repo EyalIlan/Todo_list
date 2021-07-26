@@ -77,10 +77,9 @@ const Delete = (id) =>{
 
 const finishTask = (id) =>{
     // console.log(id);
-    let post = PostsArr.find(p => p.id === id)
-    console.log(post);
-     
+    let post = PostsArr.find(p => p.id === id)     
      post.isCheck = !post.isCheck
+    //  console.log(post);
      showPosts()
 }
 
@@ -92,21 +91,29 @@ const showPosts = () =>{
     for(let post of PostsArr){   
         
         let check
+        let input;
 
         if(!post.isCheck){
-            check =  `<del><p>${post.post}</p></del>`
+            check =  `<p>${post.post}</p>`
+            input =   `<input type="checkbox" onclick="finishTask(${post.id})">`
         }
         else{
-            check =  `<p>${post.post}</p>`
+            check =  `<del><p>${post.post}</p></del>`
+            input =   `<input type="checkbox" onclick="finishTask(${post.id})" checked>`
         }
 
         if(!post.editMode){
             POSTS.innerHTML += `<div class="post">
             <div class="flex side">
-                <input type="checkbox" onclick = "finishTask(${post.id})" checked= "${post.isCheck}">
+            ` 
+            +
+            input 
+            +
+            `
             </div>
             <div class="flex">
             `
+            
             + 
             check
             +

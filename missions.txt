@@ -1,3 +1,6 @@
-//edit function
-//add edit value to the original post
-// cross task -> cross the task when the finish button is pressed
+//edit function $
+//add edit value to the original post $
+// cross task -> cross the task when the finish button is pressed $
+
+// add local storagh
+// add more style
